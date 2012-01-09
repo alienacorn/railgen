@@ -32,18 +32,20 @@ $(document).ready(function () {
 
 var routes = [];
 
-function walkStations(station, route, to) {
+function walkStations(station, route, to, visited) {
 	for (dest_index in stations[station].destinations) {
 		var destination = stations[station].destinations[dest_index];
-		if (destination == route[0]) return;
+		if ((destination in visited) && (visited[destination] == true)) continue;
 		route.push(destination);
+		visited[destination] = true;
 		if (destination == to) {
 			routes.push($.merge([],route)); // copy array
 		} else {
 			if (route.length < 12) {
-				walkStations(destination, route, to);
+				walkStations(destination, route, to, visited);
 			}
 		}
+		visited[destination] = false;
 		route.pop();
 	}
 }
@@ -70,8 +72,9 @@ function calculateDirections() {
 		return;
 	} else {
 		routes = [];
+		var visited = [];
 		var route = [from];
-		walkStations(from, route, to);
+		walkStations(from, route, to, visited);
 		if (routes.length == 0) {
 			$("#directions").html("Sorry, I'm too stupid to figure that out.");
 			return;
