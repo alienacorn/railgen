@@ -73,6 +73,7 @@ function calculateDirections() {
 	} else {
 		routes = [];
 		var visited = [];
+		visited[from] = true;
 		var route = [from];
 		walkStations(from, route, to, visited);
 		if (routes.length == 0) {
