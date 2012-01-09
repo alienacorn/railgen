@@ -40,7 +40,7 @@ function walkStations(station, route, to) {
 		if (destination == to) {
 			routes.push($.merge([],route)); // copy array
 		} else {
-			if (route.length < 9) {
+			if (route.length < 12) {
 				walkStations(destination, route, to);
 			}
 		}
@@ -86,6 +86,7 @@ function calculateDirections() {
 		});
 		var directions = '<table id="#routes"><tr><th>Route</th><th>Stops</th><th>Distance</th></tr>';
 		for(route_index in routes) {
+			if (route_index == 5) break;
 			var route = routes[route_index];
 			directions += "<tr><td>";
 			for (stop_index in route) {
