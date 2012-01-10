@@ -1,0 +1,21 @@
+var rail_root = "http://dl.dropbox.com/u/35326912/railmap/userscript/";
+var rail_Icon = L.Icon.extend({
+iconUrl: rail_root+'img/rail.png',
+shadowUrl: rail_root+'img/blank.png',
+iconSize: new L.Point(16, 16),
+iconAnchor: new L.Point(8, 8),
+popupAnchor: new L.Point(0, 0)
+});
+var RailIcon = new rail_Icon();
+var haha = "#{@network.name}"
+var rail_data =[
+- @network.each_station do |st|
+  {'name':'#{st.name.escape_single_quotes()}','desc':'#{(st.notes ? st.notes.escape_single_quotes() : '')}','x':#{st.x},'z':#{st.z}},
+];
+$.each(rail_data, function(i, item){
+var loc = $.extend({x:0, y:64, z:0, world:0},item);
+var station_markerPosition = dynmap.getProjection().fromLocationToLatLng(loc);
+var marker = new L.Marker(station_markerPosition, {icon: RailIcon});
+marker.bindPopup(item.name);
+dynmap.map.addLayer(marker);
+});
