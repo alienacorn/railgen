@@ -1,0 +1,194 @@
+name: Reddit PvE r4 Rail Network
+xrange: [-2200, 2200]
+zrange: [-2200, 2200]
+
+stations:
+
+    "???":
+         x: -5
+         y: 77
+         z: -1163
+
+    "Alderton":
+         x: -111
+         y: 85
+         z: -1742
+
+    "Avalon":
+         x: -1801
+         y: 80
+         z: -1866
+
+    "Brom":
+         x: 1353
+         y: 66
+         z: 878
+
+    "Buddington":
+         x: 1719
+         y: 82
+         z: 118
+
+    "Douglass":
+         x: 550
+         y: 66
+         z: 1640
+
+    "Duckington":
+         x: 157
+         y: 91
+         z: -1607
+
+    "Juliet Fjords":
+         x: 399
+         y: 90
+         z: -1557
+
+    "Junction 1":
+         x: -1251
+         y: 80
+         z: -1803
+
+    "DP Junction":
+         x: 171
+         y: 52
+         z: 879
+
+    "Junction 3":
+         x: 172
+         y: 52
+         z: 201
+
+    "Lupine Valley":
+         x: 160
+         y: 87
+         z: 1705
+
+    "Main Junction":
+         x: 171
+         y: 55
+         z: 3
+
+    "Monkey Haus":
+         x: 487
+         y: 55
+         z: 1724
+
+    "Point":
+         x: 203
+         y: 50
+         z: 1
+
+    "Shimano":
+         x: 1
+         y: 50
+         z: -852
+
+    "Shiro":
+         x: -1346
+         y: 94
+         z: -1195
+
+    "Snowpoint":
+         x: 175
+         y: 89
+         z: 1803
+
+    "South Gate":
+         x: 1900
+         y: 63
+         z: 57
+
+    "Spawn":
+         x: 0
+         y: 55
+         z: 0
+
+    "Underwater Dome":
+         x: 171
+         y: 52
+         z: -208
+
+    "Villa of Ted":
+         x: -1548
+         y: 79
+         z: -1788
+
+lines:
+
+    101:
+        name: "Snowpoint-Brom"
+        direction: east
+        type: trunk
+        flow: twoway
+        level: underground
+        stops:
+        - "Snowpoint"
+        - "Lupine Valley"
+        - "DP Junction"
+        - "Brom"
+        - "Buddington"
+        - "South Gate"
+        - "Brom"
+        - "Douglass"
+        - "Monkey Haus"
+
+
+    102:
+        name: "Spawn-Shiro"
+        direction: east
+        type: trunk
+        flow: twoway
+        level: underground
+        stops:        
+        - "Spawn"
+        - "Shimano"
+        - "???"
+        - "Alderton"
+        - "Junction 1"
+        - "Shiro"
+
+    103:
+        name: "Avalon"
+        direction: east
+        type: trunk
+        flow: twoway
+        level: underground
+        stops:        
+        - "Junction 1"
+        - "Villa of Ted"
+        - "Avalon"
+
+    104:
+        name: "Alderton-Fjords"
+        direction: east
+        type: trunk
+        flow: twoway
+        level: underground
+        stops:        
+        - "Alderton"
+        - "Duckington"
+        - "Juliet Fjords"
+
+    105:
+        name: "Duckington-Spawn"
+        direction: east
+        type: trunk
+        flow: twoway
+        level: underground
+        stops:        
+        - "Duckington"
+        - "Underwater Dome"
+        - "Main Junction"
+        - "Junction 3"
+        - "Spawn"
+
+    106:
+        name: "Junction-Junction"
+        direction: east
+        type: trunk
+        flow: twoway
+        level: underground
+        stops:        
+        - "DP Junction"
+        - "Junction 3"
