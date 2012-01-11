@@ -25,12 +25,12 @@ dynmap.map.addLayer(marker);
 
 var rail_lines = [
 - @network.each_line do |line|
-  [
+  [[
   - line.each_stop do |stop|
     {x:#{stop.x},z:#{stop.z}},
   - if line.loop?
     {x:#{line.stops[0][0].x},z:#{line.stops[0][0].z}}
-  ],
+  ],'#{line.color}'],
 ];
 
 var rail_line_settings = {
@@ -43,13 +43,16 @@ weight: 4
 };
 $.each(rail_lines, function(i, rail_line){
 var rail_map_locations = [];
-for(var j=0; j<rail_line.length; j++){
+for(var j=0; j<rail_line[0].length; j++){
 rail_map_locations.push(
 dynmap.getProjection().fromLocationToLatLng(
-$.extend({x:0, y:64, z:0},rail_line[j])
+$.extend({x:0, y:64, z:0},rail_line[0][j])
 )
 );
 }
-dynmap.map.addLayer(new L.Polyline(rail_map_locations,rail_line_settings));
+
+dynmap.map.addLayer(new L.Polyline(rail_map_locations,
+$.extend(rail_line_settings, {color: rail_line[1]})
+));
 
 });
