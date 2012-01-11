@@ -1,4 +1,5 @@
 var rail_root = "http://dl.dropbox.com/u/35326912/railmap/userscript/";
+
 var rail_Icon = L.Icon.extend({
 iconUrl: rail_root+'img/rail.png',
 shadowUrl: rail_root+'img/blank.png',
@@ -7,15 +8,48 @@ iconAnchor: new L.Point(8, 8),
 popupAnchor: new L.Point(0, 0)
 });
 var RailIcon = new rail_Icon();
-var haha = "#{@network.name}"
-var rail_data =[
+
+
+var rail_stations =[
 - @network.each_station do |st|
   {'name':'#{st.name.escape_single_quotes()}','desc':'#{(st.notes ? st.notes.escape_single_quotes() : '')}','x':#{st.x},'z':#{st.z}},
 ];
-$.each(rail_data, function(i, item){
-var loc = $.extend({x:0, y:64, z:0, world:0},item);
+
+$.each(rail_stations, function(i, station){
+var loc = $.extend({x:0, y:64, z:0},station);
 var station_markerPosition = dynmap.getProjection().fromLocationToLatLng(loc);
 var marker = new L.Marker(station_markerPosition, {icon: RailIcon});
-marker.bindPopup(item.name);
+marker.bindPopup(station.name);
 dynmap.map.addLayer(marker);
+});
+
+var rail_lines = [
+- @network.each_line do |line|
+  [
+  - line.each_stop do |stop|
+    {x:#{stop.x},z:#{stop.z}},
+  - if line.loop?
+    {x:#{line.stops[0][0].x},z:#{line.stops[0][0].z}}
+  ],
+];
+
+var rail_line_settings = {
+color: 'red',
+-# fillColor: '#fff',
+-# fillOpacity: 0,
+opacity: 1,
+clickable: false,
+weight: 4
+};
+$.each(rail_lines, function(i, rail_line){
+var rail_map_locations = [];
+for(var j=0; j<rail_line.length; j++){
+rail_map_locations.push(
+dynmap.getProjection().fromLocationToLatLng(
+$.extend({x:0, y:64, z:0},rail_line[j])
+)
+);
+}
+dynmap.map.addLayer(new L.Polyline(rail_map_locations,rail_line_settings));
+
 });
