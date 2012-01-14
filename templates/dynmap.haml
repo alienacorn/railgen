@@ -1,0 +1,132 @@
+\//
+\// This file was generated using the script and data from
+\// https://github.com/leafstorm/railgen
+\//
+\// The userscript and code for interacting with the dynamic
+\// map were adapted from http://janitor61.com/mcpoi/
+\//
+
+var rail_root = "http://dl.dropbox.com/u/35326912/railmap/userscript/";
+
+var rail_Icon = L.Icon.extend({
+iconUrl: rail_root+'img/rail.png',
+shadowUrl: rail_root+'img/blank.png',
+iconSize: new L.Point(16, 16),
+iconAnchor: new L.Point(8, 8),
+popupAnchor: new L.Point(0, 0)
+});
+var rail_RailIcon = new rail_Icon();
+
+
+var rail_stations =[
+- @network.each_station do |st|
+  {'name':'#{st.name.gsub(/[']/, '\\\\\'')}','desc':'#{(st.notes ? st.notes.gsub(/[']/, '\\\\\'') : '')}','x':#{st.x},'z':#{st.z}},
+];
+var rail_stationMarkers = [];
+
+var rail_hideStations = function(){
+if(rail_stationMarkers.length){
+$.each(rail_stationMarkers, function(i,marker){
+dynmap.map.removeLayer(marker);
+})
+rail_stationMarkers = [];
+}
+};
+
+var rail_showStations = function(){
+rail_hideStations();
+$.each(rail_stations, function(i, station){
+var loc = $.extend({x:0, y:64, z:0},station);
+var station_markerPosition = dynmap.getProjection().fromLocationToLatLng(loc);
+var marker = new L.Marker(station_markerPosition, {icon: rail_RailIcon});
+marker.bindPopup(station.name+"<br>x="+station.x+"<br>z="+station.z+"<br>"+station.desc);
+rail_stationMarkers.push(marker);
+dynmap.map.addLayer(marker);
+});
+};
+rail_showStations();
+
+var rail_lines = [
+- @network.each_line do |line|
+  [[
+  - line.each_stop do |stop|
+    {x:#{stop.x},z:#{stop.z}},
+  - if line.loop?
+    {x:#{line.stops[0][0].x},z:#{line.stops[0][0].z}}
+  ],'#{line.color}'],
+];
+
+var rail_line_settings = {
+opacity: 1,
+clickable: false,
+weight: 4
+};
+
+var rail_polyLines = [];
+
+var rail_hideLines = function(){
+if(rail_polyLines.length){
+$.each(rail_polyLines, function(i,polyLine){
+dynmap.map.removeLayer(polyLine);
+})
+rail_polyLines = [];
+}
+};
+
+var rail_showLines = function(){
+rail_hideLines();
+$.each(rail_lines, function(i, rail_line){
+var rail_map_locations = [];
+for(var j=0; j<rail_line[0].length; j++){
+rail_map_locations.push(
+dynmap.getProjection().fromLocationToLatLng(
+$.extend({x:0, y:64, z:0},rail_line[0][j])
+)
+);
+polyLine = new L.Polyline(rail_map_locations,
+$.extend(rail_line_settings, {color: rail_line[1]})
+)
+dynmap.map.addLayer(polyLine);
+rail_polyLines.push(polyLine);
+}
+});
+}
+rail_showLines();
+
+var rail_html = "<div class='leaflet-control' id='rail-options' \
+style='-moz-border-radius:5px; border-radius: 5px; background-color: #BBB; \
+color: #000000; padding: 2px; width: 133px;'>\
+<span id='rail_stationsVisability'>Hide Stations</span><br />\
+<span id='rail_lineVisability'>Hide Lines</span>\
+</div>";
+
+function rail_attachPanel() {
+if($(".coord-control").length) {
+$(".coord-control").after(rail_html);
+$("#rail-options span").css({cursor:"pointer","text-decoration":"underline"}).click(function(){
+switch($(this).attr("id")){
+case "rail_stationsVisability":
+if(rail_stationMarkers.length){
+rail_hideStations();
+$(this).html("Show Stations");
+} else {
+rail_showStations();
+$(this).html("Hide Stations");
+}
+break;
+case "rail_lineVisability":
+if(rail_polyLines.length){
+rail_hideLines();
+$(this).html("Show Lines");
+} else {
+rail_showLines();
+$(this).html("Hide Lines");
+}
+break;
+}
+});
+} else {
+window.setTimeout(rail_attachPanel,100);
+}
+}
+rail_attachPanel();

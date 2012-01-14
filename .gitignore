@@ -2,3 +2,4 @@
 *.html
 .DS_Store
 pve-6-rails-connection.js
+userscript/dynmap.js
