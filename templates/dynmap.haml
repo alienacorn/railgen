@@ -84,3 +84,41 @@ rail_polyLines.push(polyLine);
 });
 }
 rail_showLines();
+
+var rail_html = "<div class='leaflet-control' id='rail-options' \
+style='-moz-border-radius:5px; border-radius: 5px; background-color: #BBB; \
+color: #000000; padding: 2px; width: 133px;'>\
+<span id='rail_stationsVisability'>Hide Stations</span><br />\
+<span id='rail_lineVisability'>Hide Lines</span>\
+</div>";
+
+function rail_attachPanel() {
+if($(".coord-control").length) {
+$(".coord-control").after(rail_html);
+$("#rail-options span").css({cursor:"pointer","text-decoration":"underline"}).click(function(){
+switch($(this).attr("id")){
+case "rail_stationsVisability":
+if(rail_stationMarkers.length){
+rail_hideStations();
+$(this).html("Show Stations");
+} else {
+rail_showStations();
+$(this).html("Hide Stations");
+}
+break;
+case "rail_lineVisability":
+if(rail_polyLines.length){
+rail_hideLines();
+$(this).html("Show Lines");
+} else {
+rail_showLines();
+$(this).html("Hide Lines");
+}
+break;
+}
+});
+} else {
+window.setTimeout(rail_attachPanel,100);
+}
+}
+rail_attachPanel();
