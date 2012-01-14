@@ -1,10 +1,15 @@
 // ==UserScript==
 // @name           PVE Rail Map
-// @namespace      https://github.com/alienacorn/railgen
+// @namespace      https://github.com/leafstorm/railgen
 // @description    PVE Rail Map
 // @include        *nerd.nu/maps/pve*
 // @require            http://github.com/sizzlemctwizzle/GM_config/raw/master/gm_config.js
 // ==/UserScript==
+//
+// The userscript and code for interacting with the dynamic
+// map were adapted from http://janitor61.com/mcpoi/
+//
+
 
 GM_config.init(
 {
