@@ -30,12 +30,6 @@ def is_a_number?(s)
   s.to_s.match(/\A[+-]?\d+?(\.\d+)?\Z/) == nil ? false : true
 end
 
-class String
-  def escape_single_quotes
-    self.gsub(/[']/, '\\\\\'')
-  end
-end
-
 class RailNetwork
   def self.load (data)
     network = self.new(data["name"] || "Rail Network")
@@ -399,4 +393,3 @@ if __FILE__ == $0
     io.write render_template(template, network, options[:style])
   end
 end
-

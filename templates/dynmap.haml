@@ -12,7 +12,7 @@ var rail_RailIcon = new rail_Icon();
 
 var rail_stations =[
 - @network.each_station do |st|
-  {'name':'#{st.name.escape_single_quotes()}','desc':'#{(st.notes ? st.notes.escape_single_quotes() : '')}','x':#{st.x},'z':#{st.z}},
+  {'name':'#{st.name.gsub(/[']/, '\\\\\'')}','desc':'#{(st.notes ? st.notes.gsub(/[']/, '\\\\\'') : '')}','x':#{st.x},'z':#{st.z}},
 ];
 var rail_stationMarkers = [];
 
