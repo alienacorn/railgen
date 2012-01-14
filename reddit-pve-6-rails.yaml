@@ -102,6 +102,14 @@ stations:
     Northeast 3000:
         x: 2999
         z: -2999
+
+    Definitive Shack:
+        x: 2838
+        z: -1254
+
+    "East-Northeast 3000":
+        x: 2999
+        z: -1249
         
     # Eastern Stations
     East Transfer:
@@ -172,6 +180,10 @@ stations:
         x: 1559
         z: 2230
         notes: "Schererererer's Uberproject"
+
+    Southeast 3000:
+        x: 2999
+        z: 2999
         
     # Southern Stations
     South Transfer:
@@ -412,7 +424,8 @@ lines:
         - Northwest 3000
         - "World's End Outpost"
         - Northeast 3000
-        
+        - "East-Northeast 3000"
+        - Southeast 3000
         
     
     # 200 lines - Central (Seneca)
@@ -699,6 +712,10 @@ lines:
         stops:
         - Pleasantville
         - Gobias
+        - [2500,-1254]
+        - Definitive Shack
+        - [2838,-1248]
+        - "East-Northeast 3000"
 
     740:
         name: "PV/Esper"
