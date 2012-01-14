@@ -31,7 +31,7 @@ $.each(rail_stations, function(i, station){
 var loc = $.extend({x:0, y:64, z:0},station);
 var station_markerPosition = dynmap.getProjection().fromLocationToLatLng(loc);
 var marker = new L.Marker(station_markerPosition, {icon: rail_RailIcon});
-marker.bindPopup(station.name);
+marker.bindPopup(station.name+"<br>x="+station.x+"<br>z="+station.z+"<br>"+station.desc);
 rail_stationMarkers.push(marker);
 dynmap.map.addLayer(marker);
 });
