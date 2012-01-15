@@ -202,7 +202,7 @@ stations:
         x: -212
         z: 2401
 
-    "SxSW Station":
+    SxSW Station:
         x: -600
         z: 2400
 
@@ -652,9 +652,19 @@ lines:
         level: surface
         stops:
         - South Portal
-        - "Makdaam's Retreat"
+        - "Makdaam's Junction"
         - Southquan
 
+    535:
+        name: "South by Southwest"
+        direction: west
+        type: branch
+        flow: twoway:
+        level: surface
+        stops:
+        - "Makdaam's Junction"
+        - "Makdaam's Retreat"
+        - SxSW Station
 
     540:
         name: "Deepholm"
