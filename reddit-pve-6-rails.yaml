@@ -194,9 +194,17 @@ stations:
         x: -40
         z: 1700
 
-    "Makdaam's Retreat":
+    "Makdaam's Junction":
         x: 2
         z: 2401
+
+    "Makdaam's Retreat":
+        x: -212
+        z: 2401
+
+    "SxSW Station":
+        x: -600
+        z: 2400
 
     Southquan:
         x: 2
