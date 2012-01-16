@@ -659,7 +659,7 @@ lines:
         name: "South by Southwest"
         direction: west
         type: branch
-        flow: twoway:
+        flow: twoway
         level: surface
         stops:
         - "Makdaam's Junction"
