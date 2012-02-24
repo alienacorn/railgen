@@ -1,0 +1,92 @@
+name: Reddit PvE r7 Rail Network
+xrange: [-3200, 3200]
+zrange: [-3200, 3200]
+
+stations:
+
+  Darco Union Terminal:
+    x: -1867
+    y: 77
+    z: -1872
+
+  Camp Darco:
+    x: -1856
+    y: 70
+    z: -2061
+
+  Bromland:
+    x: -1237
+    y: 66
+    z: -1951
+
+  West Portal:
+    x: -1797
+    y: 65
+    z: 109
+
+  Wellspring:
+    x: -1658
+    y: 69
+    z: -1268
+
+  Little Britain:
+    x: -1845
+    y: 87
+    z: -1701
+    
+lines:
+
+  5000:
+    name: Darco Camp-Union
+    direction: south
+    type: trunk
+    flow: twoway
+    level: underground
+    stops:
+    - Camp Darco
+    - Darco Union Terminal
+
+  5100:
+    name: Darco-West Portal
+    direction: south
+    type: citylink
+    flow: twoway
+    level: underground
+    stops:
+    - Darco Union Terminal
+    - West Portal
+
+  5200:
+    name: Darco-Wellspring
+    direction: south
+    type: majorloop
+    flow: twoway
+    level: underground
+    stops:
+    - Darco Union Terminal
+    - [-1866, -1181]
+    - [-1699, -1180]
+    - Wellspring
+
+  5300:
+    name: Darco Union-Bromland
+    direction: east
+    type: branch
+    flow: twoway
+    level: underground
+    stops:
+    - Darco Union Terminal
+    - [-1300, -1873]
+    - [-1300, -1951]
+    - Bromland
+
+  5400:
+    name: Darco-Little Britain
+    direction: east
+    type: local
+    flow: twoway
+    level: underground
+    stops:
+    - Darco Union Terminal
+    - [-1820, -1866]
+    - Little Britain
