@@ -33,6 +33,26 @@ stations:
     x: -1845
     y: 87
     z: -1701
+
+  Fort Howed:
+    x: 321
+    y: 87
+    z: -1567
+
+  Rack City:
+    x: -20
+    y: 95
+    z: -1784
+
+  Tree Town:
+    x: 148
+    y: 76
+    z: -1456
+
+  Freycliff:
+    x: 1860
+    y: 70
+    z: -1984
     
 lines:
 
@@ -90,3 +110,84 @@ lines:
     - Darco Union Terminal
     - [-1820, -1866]
     - Little Britain
+
+  3000:
+    name: North Express
+    direction: north
+    type: branch
+    flow: twoway
+    level: underground
+    stops:
+    - Rack City
+    - [-2,-1567] #Intersection with Fort Howed rail
+    
+  4000:
+    name: 1700 Loop
+    direction: south
+    type: branch
+    flow: loop
+    level: underground
+    stops:
+    - [-1700,-1700]
+    - Rack City
+    - [ 1700,-1700]
+    - [ 1700, 1700]
+    - [-1700, 1700]
+
+  4100:
+    name: 850 Loop
+    direction: south
+    type: branch
+    flow: loop
+    level: underground
+    stops:
+    - [-850,-850]
+    - [ 850,-850]
+    - [ 850, 850]
+    - [-850, 850]
+
+  6000:
+    name: Fort Howed Rail
+    direction: south
+    type: trunk
+    flow: twoway
+    level: underground
+    stops:
+    - Fort Howed
+    - [-2, -1567] #Intersection with North Express
+    - [-37,-1567]
+    - [-37,-1213]
+    - [-37, -1178]
+
+  6010:
+    name: Kattalunikes
+    direction: east
+    type: citylink
+    flow: twoway
+    level: underground
+    stops:
+    - [-37,-1213]
+    - [64, -1213]
+
+  6100:
+    name: Wellspring-Spawn
+    direction: east
+    type: local
+    flow: twoway
+    level: underground
+    stops:
+    - Wellspring
+    - [-37, -1178]
+    - [-37, -850] #850 loop intersection
+    - [-22, -125] #North Line & Lothos intersection
+
+  7500:
+    name: Freycliff-Rack
+    direction: west
+    type: citylink
+    flow: twoway
+    level: underground
+    stops:
+    - Freycliff
+    - [1860,-1801]
+    - Rack City
